@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from  'react';
 import { View, Text, StyleSheet, ScrollView} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import CSImage from '../components/imgfromurl';
 import { LabelText, RenderFilms } from '../Utilities';
