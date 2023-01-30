@@ -1,4 +1,4 @@
-import { Text, StyleSheet} from 'react-native';
+import { Text, StyleSheet, View} from 'react-native';
 import { useFetch } from "react-async";
 import uuid from 'react-native-uuid';
 import { useNavigation } from '@react-navigation/native';
@@ -56,7 +56,7 @@ export const RenderVehicles = (props) => {
       if(data) {
          let newKey = uuid.v4();
          console.log("Vehicles " + newKey.toString());
-         return ( 
+         return (
             <Text key={newKey.toString()} style={styles.linkstyle} onPress={() => navigation.navigate('Vehicle', 
                {vehicleurl: p,})} > 
                {data.name}
@@ -78,8 +78,9 @@ const navigation = useNavigation();
       let newKey = uuid.v4();
       console.log("Starships " + newKey.toString());
       if(data) {
+         console.log("url " + p);
          return ( 
-            <Text key={newKey.toString()} style={styles.linkstyle} onPress={() => navigation.navigate('Starship', 
+            <Text key={newKey.toString()} style={styles.linkstyle} style={styles.linkstyle} onPress={() => navigation.navigate('Starship', 
                {shiprurl: p,})} > 
                {data.name}
             </Text>

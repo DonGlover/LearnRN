@@ -49,39 +49,34 @@ const RenderPlanets = (props) => {
 }
 
 const Film = (props) => {
-   const [filmdata, setCData] = useState(null);
-   const navigation = useNavigation();
    const route = useRoute();
-
    var purl = route.params.filmurl;
       
-   useEffect(() => {
-     fetch(
-         purl
-         )
-         .then((response) => response.json())
-         .then(setCData)
-         .catch((err)=>console.log(err))
-     }, [purl]);
+   const { data, error, isPending, run } = useFetch(purl, { headers });
+   
+   run();
 
-   if(filmdata) {
+   if (isPending) return <Text>"Loading..."</Text>
+   if (error) return <Text>`Something went wrong: ${error.message}`</Text>
+
+   if(data) {  
       return(
          <View style={styles.videoContainer}>
-            <ShowVideo style={styles.video} name={filmdata.title}/>
+            <ShowVideo style={styles.video} name={data.title}/>
             <ScrollView style={styles.mytext} contentContainerStyle={styles.contentContainer} >
-                  <Text style={styles.filmtitledata}>{filmdata.title}</Text>
-                  <Text style={styles.filmdata}><LabelText label="Episode ID: "/>{filmdata.episode_id}</Text>
+                  <Text style={styles.filmtitledata}>{data.title}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Episode ID: "/>{data.episode_id}</Text>
                   <Text style={styles.filmdata}><LabelText label="Opening Crawl:"/></Text>
-                  <Text style={styles.filmdata}>{filmdata.opening_crawl}</Text>
-                  <Text style={styles.filmdata}><LabelText label="Director: "/>{filmdata.director}</Text>
-                  <Text style={styles.filmdata}><LabelText label="Producer: "/>{filmdata.producer}</Text>
-                  <Text style={styles.filmdata}><LabelText label="Release Date: "/>{filmdata.release_date}</Text>
+                  <Text style={styles.filmdata}>{data.opening_crawl}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Director: "/>{data.director}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Producer: "/>{data.producer}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Release Date: "/>{data.release_date}</Text>
                   <Text style={styles.filmdata}><LabelText label="Characters: "/></Text>
-                  <RenderCharacters list={filmdata.characters}/>
+                  <RenderCharacters list={data.characters}/>
                   <Text style={styles.filmdata}><LabelText label="Planets: "/></Text>
-                  <RenderPlanets list={filmdata.planets}/>
+                  <RenderPlanets list={data.planets}/>
                   <Text style={styles.filmdata}><LabelText label="Vehicles: "/></Text>
-                  <RenderVehicles list={filmdata.vehicles}/>
+                  <RenderVehicles list={data.vehicles}/>
             </ScrollView>
          </View>
       )
@@ -136,3 +131,37 @@ var styles = StyleSheet.create({
 });
 
 export default Film;
+
+/*
+  useEffect(() => {
+     fetch(
+         purl
+         )
+         .then((response) => response.json())
+         .then(setCData)
+         .catch((err)=>console.log(err))
+     }, [purl]);
+
+   if(filmdata) {
+      return(
+         <View style={styles.videoContainer}>
+            <ShowVideo style={styles.video} name={filmdata.title}/>
+            <ScrollView style={styles.mytext} contentContainerStyle={styles.contentContainer} >
+                  <Text style={styles.filmtitledata}>{filmdata.title}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Episode ID: "/>{filmdata.episode_id}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Opening Crawl:"/></Text>
+                  <Text style={styles.filmdata}>{filmdata.opening_crawl}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Director: "/>{filmdata.director}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Producer: "/>{filmdata.producer}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Release Date: "/>{filmdata.release_date}</Text>
+                  <Text style={styles.filmdata}><LabelText label="Characters: "/></Text>
+                  <RenderCharacters list={filmdata.characters}/>
+                  <Text style={styles.filmdata}><LabelText label="Planets: "/></Text>
+                  <RenderPlanets list={filmdata.planets}/>
+                  <Text style={styles.filmdata}><LabelText label="Vehicles: "/></Text>
+                  <RenderVehicles list={filmdata.vehicles}/>
+            </ScrollView>
+         </View>
+      )
+   }
+   */

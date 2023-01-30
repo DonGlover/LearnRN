@@ -4,16 +4,74 @@ import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import CSImage from '../components/imgfromurl';
 import { LabelText, RenderFilms } from '../Utilities';
+import { useFetch } from "react-async";
+
+const headers = { Accept: "application/json" };
 
 const Starship = (props) => {
-   const [starshipdata, setCData] = useState(null);
-   const navigation = useNavigation();
    const route = useRoute();
 
    var purl = route.params.shiprurl;
-      
-   //console.log(purl);
-   useEffect(() => {
+   console.log(purl);
+   const { data, error, isPending, run } = useFetch(purl, { headers });
+
+   run();
+
+   if (isPending) return <Text>"Loading..."</Text>
+   if (error) return <Text>`Something went wrong: ${error.message}`</Text>
+
+   if(data) { 
+      return(<View >
+         <CSImage type="starships" name={data.name}/>
+         <ScrollView  contentContainerStyle={styles.contentContainer}>
+            <Text style={styles.charnamestyle}>{data.name}</Text>
+            <Text style={styles.charstyle}><LabelText label="Model: " />{data.model}</Text>
+            <Text style={styles.charstyle}><LabelText label="Manufacturer: " />{data.manufacturer}</Text>
+            <Text style={styles.charstyle}><LabelText label="Cost in credits: " />{data.cost_in_credits}</Text>
+            <Text style={styles.charstyle}><LabelText label="length: " />{data.length}</Text>
+            <Text style={styles.charstyle}><LabelText label="Max atmospheric speed: " />{data.max_atmosphering_speed}</Text>
+            <Text style={styles.charstyle}><LabelText label="Crew: " />{data.crew}</Text>
+            <Text style={styles.charstyle}><LabelText label="Passengers: " />{data.passengers}</Text>
+            <Text style={styles.charstyle}><LabelText label="Consumables: " />{data.consumables}</Text>
+            <Text style={styles.charstyle}><LabelText label="Hyperdrive rating: " />{data.hyperdrive_rating}</Text>
+            <Text style={styles.charstyle}><LabelText label="MGLT: " />{data.MGLT}</Text>
+            <Text style={styles.charstyle}><LabelText label="Starship class: " />{data.starship_class}</Text>
+            <Text style={styles.charstyle}><LabelText label="Films: "/></Text>
+            <RenderFilms list={data.films}/>   
+            </ScrollView>
+      </View>);
+   }
+   return <Text>Loading</Text>;
+};
+
+const styles = StyleSheet.create({
+   charstyle: {
+      padding: 10,
+      fontSize: 18,
+      justifyContent:'space-between', 
+      marginBottom: -20
+   },
+   charnamestyle: {
+      padding: 10,
+      fontSize: 26,
+      justifyContent:'space-between', 
+      marginBottom: -20,
+      fontWeight: 'bold',
+   },
+   scrollcontainer: {
+      flex: 1
+   },
+   contentContainer: {
+    backgroundColor: 'lightgrey',
+    paddingBottom: 50,
+    height: 1000
+   }
+ });
+
+export default Starship;
+/* 
+   const [starshipdata, setCData] = useState(null);
+useEffect(() => {
      fetch(
          purl
          )
@@ -43,31 +101,41 @@ const Starship = (props) => {
                </ScrollView>
          </View>);
      }
-     return <Text>Loading</Text>;
-};
+   */
+  /*
+  const Starship = (props) => {
+   const route = useRoute();
 
-const styles = StyleSheet.create({
-   charstyle: {
-      padding: 10,
-      fontSize: 18,
-      justifyContent:'space-between', 
-      marginBottom: -20
-   },
-   charnamestyle: {
-      padding: 10,
-      fontSize: 26,
-      justifyContent:'space-between', 
-      marginBottom: -20,
-      fontWeight: 'bold',
-   },
-   scrollcontainer: {
-      flex: 1
-   },
-   contentContainer: {
-    backgroundColor: 'lightgrey',
-    paddingBottom: 50,
-    height: 1000
+   var purl = route.params.shiprurl;
+   console.log(purl);
+   const { data, error, isPending, run } = useFetch(purl, { headers });
+
+   run();
+
+   if (isPending) return <Text>"Loading..."</Text>
+   if (error) return <Text>`Something went wrong: ${error.message}`</Text>
+
+   if(data) { 
+      return(<View >
+         <CSImage type="starships" name={data.name}/>
+         <ScrollView  contentContainerStyle={styles.contentContainer}>
+            <Text style={styles.charnamestyle}>{starshipdata.name}</Text>
+            <Text style={styles.charstyle}><LabelText label="Model: " />{data.model}</Text>
+            <Text style={styles.charstyle}><LabelText label="Manufacturer: " />{data.manufacturer}</Text>
+            <Text style={styles.charstyle}><LabelText label="Cost in credits: " />{data.cost_in_credits}</Text>
+            <Text style={styles.charstyle}><LabelText label="length: " />{data.length}</Text>
+            <Text style={styles.charstyle}><LabelText label="Max atmospheric speed: " />{data.max_atmosphering_speed}</Text>
+            <Text style={styles.charstyle}><LabelText label="Crew: " />{data.crew}</Text>
+            <Text style={styles.charstyle}><LabelText label="Passengers: " />{data.passengers}</Text>
+            <Text style={styles.charstyle}><LabelText label="Consumables: " />{data.consumables}</Text>
+            <Text style={styles.charstyle}><LabelText label="Hyperdrive rating: " />{data.hyperdrive_rating}</Text>
+            <Text style={styles.charstyle}><LabelText label="MGLT: " />{data.MGLT}</Text>
+            <Text style={styles.charstyle}><LabelText label="Starship class: " />{data.starship_class}</Text>
+            <Text style={styles.charstyle}><LabelText label="Films: "/></Text>
+            <RenderFilms list={data.films}/>   
+            </ScrollView>
+      </View>);
    }
- });
-
-export default Starship;
+   return <Text>Loading</Text>;
+};
+*/

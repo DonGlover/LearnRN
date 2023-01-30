@@ -16,11 +16,11 @@ function setNextURL(url){
 
 const ItemRender = ({ title, curl }) => {
   const navigation = useNavigation();
-
+ console.log("Starship item render " + curl);
   return(
   <View >
     <Text style={styles.charstyle} onPress={() => navigation.navigate('Starship', 
-      {charurl: curl,
+      {shiprurl: curl,
       })} > 
       {title}
     </Text>
@@ -52,6 +52,7 @@ const Starships = (props) => {
 
     if(Starshipdatalist) {        
       setNextURL(Starshipdatalist.next);
+
       return (
         <View style={styles.screen}>                  
           <FlatList 
