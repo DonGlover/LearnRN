@@ -7,6 +7,7 @@ import Infonavbutton from '../components/Infonavbutton';
 
 var purl;
 function setNextURl(url){
+  console.log("url " + url );
   if(purl===undefined || purl===null || purl==="" || url===null || url===""){
     purl = getBase() + '/api/people/';
   }else{

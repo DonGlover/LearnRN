@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from  'react';
-import { View, Text, StyleSheet, Image, FlatList, ScrollView} from 'react-native';
-import { useLinkProps, useNavigation,useRoute } from '@react-navigation/native';
-import CSImage from '../components/imgfromurl';
-import { LabelText, RenderVehicles, RenderStarships, RenderFilms} from '../Utilities';
+import { View, Text, StyleSheet, ScrollView} from 'react-native';
+import {  useNavigation,useRoute } from '@react-navigation/native';
 import { useFetch } from "react-async";
+import CSImage from '../components/imgfromurl';
+import { LabelText} from '../components/LabelText';
+import { RenderVehicles, RenderStarships, RenderFilms } from '../components/RenderComponents';
 
 const headers = { Accept: "application/json" };
 

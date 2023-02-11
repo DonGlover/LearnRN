@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from  'react';
 import { View, Text, StyleSheet, ScrollView} from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import CSImage from '../components/imgfromurl';
-import { LabelText, RenderFilms } from '../Utilities';
 import { useFetch } from "react-async";
+import { LabelText} from '../components/LabelText';
+import CSImage from '../components/imgfromurl';
+import { RenderFilms } from '../components/RenderComponents';
 
 const headers = { Accept: "application/json" };
 

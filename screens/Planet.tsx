@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from  'react';
 import { View, Text, StyleSheet, ScrollView} from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { LabelText, RenderCharacters, RenderFilms } from '../Utilities';
 import { useFetch } from "react-async";
+import { LabelText} from '../components/LabelText';
+import {RenderCharacters, RenderFilms} from '../components/RenderComponents';
 
 const headers = { Accept: "application/json" };
 

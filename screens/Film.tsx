@@ -1,11 +1,12 @@
 // Load the module
-import React, {useState, useEffect} from  'react';
 import { View, StyleSheet, Text, ScrollView} from 'react-native';
 import { useNavigation,useRoute } from '@react-navigation/native';
-import {getVideoBase, LabelText, RenderCharacters, RenderVehicles } from '../Utilities';
 import Video from 'react-native-video';
 import { useFetch } from "react-async";
 import uuid from 'react-native-uuid';
+import {getVideoBase } from '../Utilities';
+import {RenderCharacters, RenderVehicles} from '../components/RenderComponents';
+import { LabelText} from '../components/LabelText';
 
 const headers = { Accept: "application/json" };
 
