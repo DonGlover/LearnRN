@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {View, Text, Button, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { useNavigation, CommonActions } from '@react-navigation/native';
+import { getKey } from '../Utilities';
 
 const Homescreen = (props) => {
   const [pageid, setPage] = useState('');
@@ -24,18 +25,18 @@ const Homescreen = (props) => {
     <View style={styles.screen}>      
  
       <Image source={http_URL}
-         style={{ height: 230, width: 200, resizeMode: 'contain', margin: 10 }} />
-        {swbutts.map(index => {
-              return(
-                <View>
-                <TouchableOpacity style={styles.button} onPress={()=>goToOtherScreen(index)}>
-                  <Text style={styles.buttonFont}>
-                    Open the list of {index}
-                  </Text>
-                </TouchableOpacity>
-                </View>
-              )}
-            )}         
+        style={{ height: 230, width: 200, resizeMode: 'contain', margin: 10 }} />
+          {swbutts.map(index => {
+                return(
+                  <View key={getKey()}>
+                    <TouchableOpacity style={styles.button} onPress={()=>goToOtherScreen(index)}>
+                      <Text style={styles.buttonFont}>
+                        Open the list of {index}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              )}         
       <Text style={{fontSize: 20}} >Using data from swapi.dev.</Text>       
     </View>
   );
@@ -51,7 +52,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#0080FF',
     padding: 10,
-    marginBottom: 5,    
+    marginBottom: 5,
+    width: 300,    
   },
   buttonFont: {
     color: '#FFFFFF',

@@ -78,11 +78,9 @@ const styles = StyleSheet.create({
     fontSize: 50
   },
   charstyle: {
-    fontSize: 24,
-  },
-  Purple: {
-    // Define your HEX color code here.
-    color: '#9C27B0',
+    fontSize: 25,
+    color: 'green',
+    textDecorationLine: 'underline'
   },
   skootch: {
     paddingRight: 10,

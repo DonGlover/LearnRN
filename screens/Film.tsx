@@ -3,9 +3,8 @@ import { View, StyleSheet, Text, ScrollView} from 'react-native';
 import { useNavigation,useRoute } from '@react-navigation/native';
 import Video from 'react-native-video';
 import { useFetch } from "react-async";
-import uuid from 'react-native-uuid';
 import {getVideoBase } from '../Utilities';
-import {RenderCharacters, RenderVehicles} from '../components/RenderComponents';
+import {RenderCharacters, RenderVehicles, RenderPlanets} from '../components/RenderComponents';
 import { LabelText} from '../components/LabelText';
 
 const headers = { Accept: "application/json" };
@@ -13,40 +12,20 @@ const headers = { Accept: "application/json" };
 // Within your render function, assuming you have a file called
 // "background.mp4" in your project. You can include multiple videos
 // on a single screen if you like.
-const ShowVideo = (props) => {
-   let http_URL = { uri: getVideoBase() + props.name.replace(/\s/g, "").toLowerCase() + '.mp4' };
+const ShowVideo = (vidname) => {
+   let http_URL = { uri: getVideoBase() + vidname.name.replace(/\s/g, "").toLowerCase() + '.mp4' };
 
    return(
-   <Video source= {http_URL}   // Can be a URL or a local file.
-         ref={(ref) => {
-            this.player = ref
-         }}                                      // Store reference
-         onBuffer={this.onBuffer}                // Callback when remote video is buffering
-         onError={this.videoError}               // Callback when video cannot be loaded
-         style={styles.video} />
+      <Video source= {http_URL}   // Can be a URL or a local file.
+            ref={(ref) => {
+
+               this.player = ref
+            }}                                      // Store reference
+            onBuffer={this.onBuffer}                // Callback when remote video is buffering
+            onError={this.videoError}               // Callback when video cannot be loaded
+               style={styles.video} />
+
    )
-}
-
-const RenderPlanets = (props) => {
-   const navigation = useNavigation();  
-   
-   return props.list.map((p: string) => {    
-      const { data, error, isPending, run } = useFetch(p, { headers });
-      run();
-
-      if (isPending) return <Text>"Loading..."</Text>
-      if (error) return <Text>`Something went wrong: ${error.message}`</Text>
-
-      if(data) {
-         let newKey = uuid.v4();
-         return ( 
-            <Text key={newKey.toString()} style={styles.linkstyle} onPress={() => navigation.navigate('Planet', 
-               {planeturl: p,})} > 
-               {data.name}
-            </Text>
-         )
-      } 
-   })
 }
 
 const Film = (props) => {
@@ -64,7 +43,7 @@ const Film = (props) => {
       return(
          <View style={styles.videoContainer}>
             <ShowVideo style={styles.video} name={data.title}/>
-            <ScrollView style={styles.mytext} contentContainerStyle={styles.contentContainer} >
+            <ScrollView contentContainerStyle={styles.contentContainer} >
                   <Text style={styles.filmtitledata}>{data.title}</Text>
                   <Text style={styles.filmdata}><LabelText label="Episode ID: "/>{data.episode_id}</Text>
                   <Text style={styles.filmdata}><LabelText label="Opening Crawl:"/></Text>
@@ -86,15 +65,17 @@ const Film = (props) => {
 };
 
 // Later on in your styles..
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
    videoContainer: {
       flex: 1,
       flexDirection: 'column',
       backgroundColor: 'white',
   },
-  mytext: {
+  contentContainer: {
+   backgroundColor: 'lightgrey',
+   paddingBottom: 50,
+   height: 2500,
    top: 305,
-
   },
   filmdata: {
    padding: 10,
@@ -115,19 +96,6 @@ var styles = StyleSheet.create({
       bottom: 300,
       left: 0,
       right: 0,
-  },
-  contentContainer: {
-   backgroundColor: 'lightgrey',
-   paddingBottom: 50,
-   height: 2500
-  },
-  linkstyle: {
-     padding: 10,
-     fontSize: 18,
-     justifyContent:'space-between', 
-     marginBottom: -20,
-     color: 'green',
-     textDecorationLine: 'underline'
   },
 });
 

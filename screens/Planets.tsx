@@ -78,7 +78,9 @@ const styles = StyleSheet.create({
    fontSize: 50
   },
   planetstyle: {
-   fontSize: 24,
+    fontSize: 25,
+    color: 'green',
+    textDecorationLine: 'underline'
  },
 });
 

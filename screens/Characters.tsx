@@ -55,13 +55,12 @@ const Characters = (props) => {
       return (
         <View style={styles.screen}>                  
           <FlatList 
-            data={characterdatalist.results}
-            
+            data={characterdatalist.results}            
             renderItem={({ item }) => <ItemRender title={item.name} curl={item.url} />}>
           </FlatList>
           <Infonavbutton mytext={'Next'} onPress={goToCharactersScreen}/>
           <Infonavbutton mytext={"Return to the Home Screen"}
-            onPress={() => props.navigation.navigate('Homescreen')}
+              onPress={() => props.navigation.navigate('Homescreen')}
           />
         </View>
       );
@@ -77,11 +76,9 @@ const styles = StyleSheet.create({
     fontSize: 50
   },
   charstyle: {
-    fontSize: 24,
-  },
-  Purple: {
-    // Define your HEX color code here.
-    color: '#9C27B0',
+    fontSize: 25,
+    color: 'green',
+    textDecorationLine: 'underline'
   },
   skootch: {
     paddingRight: 10,

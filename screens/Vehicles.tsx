@@ -78,7 +78,9 @@ const styles = StyleSheet.create({
     fontSize: 50
   },
   vehiclestyle: {
-    fontSize: 24,
+    fontSize: 25,
+    color: 'green',
+    textDecorationLine: 'underline'
   },
   Purple: {
     // Define your HEX color code here.

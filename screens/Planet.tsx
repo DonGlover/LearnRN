@@ -4,6 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { useFetch } from "react-async";
 import { LabelText} from '../components/LabelText';
 import {RenderCharacters, RenderFilms} from '../components/RenderComponents';
+import { globalstyles } from '../Utilities';
 
 const headers = { Accept: "application/json" };
 
@@ -21,46 +22,25 @@ const Planet = (props) => {
    if(data) {  
       return(
       <View >
-         <ScrollView contentContainerStyle={styles.contentContainer}>
-            <Text style={styles.planetnamestyle}>{data.name}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Rotation Period: "/>{data.rotation_period}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Orbital Period: "/>{data.orbital_period}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Diameter: "/>{data.diameter}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Climate: "/>{data.climate}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Gravity: "/>{data.gravity}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Terrain: "/>{data.terrain}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Surface Water: "/>{data.surface_water}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Population: "/>{data.population}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Residents: "/></Text>
+         <ScrollView contentContainerStyle={globalstyles.contentContainer}>
+            <Text style={globalstyles.itemnamestyle}>{data.name}</Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Rotation Period: "/>{data.rotation_period}</Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Orbital Period: "/>{data.orbital_period}</Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Diameter: "/>{data.diameter}</Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Climate: "/>{data.climate}</Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Gravity: "/>{data.gravity}</Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Terrain: "/>{data.terrain}</Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Surface Water: "/>{data.surface_water}</Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Population: "/>{data.population}</Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Residents: "/></Text>
             <RenderCharacters list={data.residents}/>
-            <Text style={styles.planetstyle}><LabelText label="Films: "/></Text>
+            <Text style={globalstyles.textstyle}><LabelText label="Films: "/></Text>
             <RenderFilms list={data.films}/>
          </ScrollView> 
       </View>);
    }
    return <Text>Loading</Text>;
 };
-
-const styles = StyleSheet.create({
-   planetstyle: {
-      padding: 10,
-      fontSize: 18,
-      justifyContent:'space-between', 
-      marginBottom: -20
-   },
-   planetnamestyle: {
-      padding: 10,
-      fontSize: 26,
-      justifyContent:'space-between', 
-      marginBottom: -20,
-      fontWeight: 'bold',
-   },
-   contentContainer: {
-    backgroundColor: 'lightgrey',
-    paddingBottom: 50,
-    height: 1000
-   }
-});
 
 export default Planet;
 
@@ -76,18 +56,18 @@ export default Planet;
 
      if(planetdata) {
          return(<View >
-            <Text style={styles.planetnamestyle}>{planetdata.name}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Rotation Period: "/>{planetdata.rotation_period}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Orbital Period: "/>{planetdata.orbital_period}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Diameter: "/>{planetdata.diameter}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Climate: "/>{planetdata.climate}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Gravity: "/>{planetdata.gravity}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Terrain: "/>{planetdata.terrain}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Surface Water: "/>{planetdata.surface_water}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Population: "/>{planetdata.population}</Text>
-            <Text style={styles.planetstyle}><LabelText label="Residents: "/></Text>
+            <Text style={globalstyles.planetnamestyle}>{planetdata.name}</Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Rotation Period: "/>{planetdata.rotation_period}</Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Orbital Period: "/>{planetdata.orbital_period}</Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Diameter: "/>{planetdata.diameter}</Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Climate: "/>{planetdata.climate}</Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Gravity: "/>{planetdata.gravity}</Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Terrain: "/>{planetdata.terrain}</Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Surface Water: "/>{planetdata.surface_water}</Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Population: "/>{planetdata.population}</Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Residents: "/></Text>
             <RenderCharacters list={planetdata.residents}/>
-            <Text style={styles.planetstyle}><LabelText label="Films: "/></Text>
+            <Text style={globalstyles.planetstyle}><LabelText label="Films: "/></Text>
             <RenderFilms list={planetdata.films}/>            
          </View>);
      }*/
